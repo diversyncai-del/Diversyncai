@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DiverSync - Supplier Sustainability & Diversity Risk Scorer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7aa8d1 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .app-title {
+            color: #1e3c72;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .app-subtitle {
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: #f9f9f9;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #2a5298;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 13px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 6px;
+            cursor: pointer;
+        }
+
+        .forgot-password {
+            color: #2a5298;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: #1e3c72;
+            text-decoration: underline;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(42, 82, 152, 0.4);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .social-login {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 10px;
+            background: white;
+            color: #333;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .social-btn:hover {
+            background: #f5f5f5;
+            border-color: #2a5298;
+            color: #2a5298;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-btn-icon {
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .google-logo::before {
+            content: "G";
+            font-weight: 700;
+            color: #4285F4;
+        }
+
+        .apple-logo::before {
+            content: "";
+            font-size: 20px;
+        }
+
+        .outlook-logo::before {
+            content: "O";
+            font-weight: 700;
+            color: #0078D4;
+        }
+
+        .signup-section {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #666;
+            font-size: 13px;
+        }
+
+        .signup-section a {
+            color: #2a5298;
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .signup-section a:hover {
+            color: #1e3c72;
+            text-decoration: underline;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .alert.error {
+            background: #fee;
+            color: #c33;
+            border: 1px solid #fcc;
+            display: block;
+        }
+
+        .alert.success {
+            background: #efe;
+            color: #3c3;
+            border: 1px solid #cfc;
+            display: block;
+        }
+
+        .alert.info {
+            background: #eef;
+            color: #33c;
+            border: 1px solid #ccf;
+            display: block;
+        }
+
+
+
+        .loading {
+            display: none;
+            text-align: center;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #2a5298;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo-section">
+            <div class="logo-icon">🌍</div>
+            <h1 class="app-title">DiverSync</h1>
+            <p class="app-subtitle">Supplier Sustainability & Diversity Risk Scorer</p>
+        </div>
+
+        <div id="alertMessage" class="alert"></div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    placeholder="Enter your username"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Enter your password"
+                    required
+                >
+            </div>
+
+            <div class="remember-forgot">
+                <label class="remember-me">
+                    <input type="checkbox" id="rememberMe" name="rememberMe">
+                    <span>Remember me</span>
+                </label>
+                <a href="#" class="forgot-password">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn-login">Login</button>
+
+            <div class="social-login">
+                <button type="button" class="social-btn" onclick="redirectToGoogle()">
+                    <svg class="social-btn-icon" viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                    </svg>
+                    <span>Google</span>
+                </button>
+                <button type="button" class="social-btn" onclick="redirectToApple()">
+                    <svg class="social-btn-icon" viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#000000" d="M17.05 20.28c-.98.95-2.05.8-3.08.38-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.38C2.79 15.25 3.51 7.59 9.05 7.31c1.35.05 2.29.89 3.04.89.9 0 2.29-1.16 3.86-1.07 1.23.08 2.52.72 3.27 1.91-3.2 1.82-2.69 5.7.5 6.86-.52 1.52-1.54 2.91-2.67 3.82zm-1.11-7.01c-.13-3.07 2.59-4.62 2.71-4.71-.45-1.39-1.67-1.93-3.66-1.96-1.52.03-2.89 1-3.63 1.9-.55-.88-1.66-1.93-2.93-1.83-1.99.03-3.44 1.54-3.66 3.66-.04.53 0 1.07.1 1.58 1.02 2.86 5.42 4.44 6.72 4.35 1.3-.08 1.96.45 2.35.45.5 0 1.47-.47 2.1-.47 1.49.02 2.98.99 3.2 1.61-.13.08-1.51.9-3.1.9-1.5 0-2.54-.41-2.64-.41-.1 0-1.38.46-2.73.46-1.35 0-2.16-.41-2.73-.46-.57-.05-1.24-.09-1.59.1.35.2 1.02.57 2.53.57 1.51 0 2.43-.4 3.1-.41.63 0 1.15.49 1.59.49.44 0 .89-.31 1.29-.78.4-.47.75-1.16.91-2.05-.07.01-.15.03-.23.03-1.25-.02-1.95-.84-2.15-1.07z"/>
+                    </svg>
+                    <span>Apple</span>
+                </button>
+                <button type="button" class="social-btn" onclick="redirectToOutlook()">
+                    <svg class="social-btn-icon" viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#0078D4" d="M4 4h8v8H4V4zm10 0h6v8h-6V4zM4 14h8v6H4v-6zm10 0h6v6h-6v-6z"/>
+                    </svg>
+                    <span>Outlook</span>
+                </button>
+            </div>
+        </form>
+
+        <div id="loadingSpinner" class="loading">
+            <div class="spinner"></div>
+            <p>Authenticating...</p>
+        </div>
+
+        <div class="signup-section">
+            Don't have an account? <a href="#">Login</a>
+        </div>
+    </div>
+
+    <script>
+        // Dummy user credentials
+        const validUsers = {
+            'procurement_admin': 'SustainScore2026',
+            'supplier_auditor': 'AuditESG2026',
+            'compliance_officer': 'Governance2026',
+            'sustainability_lead': 'SustainLeader2026'
+        };
+
+        // Get DOM elements
+        const loginForm = document.getElementById('loginForm');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const alertMessage = document.getElementById('alertMessage');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const rememberMe = document.getElementById('rememberMe');
+
+        // Load saved username if "Remember me" was checked
+        window.addEventListener('load', () => {
+            const savedUsername = localStorage.getItem('savedUsername');
+            if (savedUsername) {
+                usernameInput.value = savedUsername;
+                rememberMe.checked = true;
+            }
+        });
+
+        // Form submission
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            validateLogin();
+        });
+
+        // Redirect to Google OAuth
+        function redirectToGoogle() {
+            const clientId = 'YOUR_GOOGLE_CLIENT_ID';
+            const redirectUri = encodeURIComponent(window.location.origin + '/auth/google/callback');
+            const scope = encodeURIComponent('openid email profile');
+            const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
+            window.location.href = authUrl;
+        }
+
+        // Redirect to Apple OAuth
+        function redirectToApple() {
+            const clientId = 'YOUR_APPLE_CLIENT_ID';
+            const redirectUri = encodeURIComponent(window.location.origin + '/auth/apple/callback');
+            const scope = encodeURIComponent('openid email');
+            const authUrl = `https://appleid.apple.com/auth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&response_mode=form_post&scope=${scope}`;
+            window.location.href = authUrl;
+        }
+
+        // Redirect to Microsoft Outlook OAuth
+        function redirectToOutlook() {
+            const clientId = 'YOUR_MICROSOFT_CLIENT_ID';
+            const redirectUri = encodeURIComponent(window.location.origin + '/auth/outlook/callback');
+            const scope = encodeURIComponent('openid email profile');
+            const authUrl = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
+            window.location.href = authUrl;
+        }
+
+        // Validate login
+        function validateLogin() {
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value;
+
+            // Clear previous messages
+            alertMessage.className = 'alert';
+
+            // Validation checks
+            if (!username || !password) {
+                showAlert('Please enter both username and password', 'error');
+                return;
+            }
+
+            // Check credentials
+            if (validUsers[username] && validUsers[username] === password) {
+                // Save username if remember me is checked
+                if (rememberMe.checked) {
+                    localStorage.setItem('savedUsername', username);
+                } else {
+                    localStorage.removeItem('savedUsername');
+                }
+
+                // Show loading state
+                showLoading(true);
+
+                // Simulate API call
+                setTimeout(() => {
+                    showLoading(false);
+                    showAlert(`Welcome ${username}! Redirecting to dashboard...`, 'success');
+                    
+                    // Simulate redirect after 1.5 seconds
+                    setTimeout(() => {
+                        // In a real application, you would redirect to the dashboard
+                        window.location.href = 'dashboard.html';
+                        // For now, just show page navigation info
+                        console.log('Redirecting to dashboard page...');
+                    }, 1500);
+                }, 1500);
+            } else {
+                showAlert('Invalid username or password. Please try again.', 'error');
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        }
+
+        // Show/hide loading spinner
+        function showLoading(show) {
+            loadingSpinner.style.display = show ? 'block' : 'none';
+            loginForm.style.display = show ? 'none' : 'block';
+        }
+
+        // Display alert messages
+        function showAlert(message, type) {
+            alertMessage.textContent = message;
+            alertMessage.className = `alert ${type}`;
+            alertMessage.style.display = 'block';
+
+            // Auto-hide error/info messages after 5 seconds
+            if (type !== 'success') {
+                setTimeout(() => {
+                    alertMessage.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        // Allow Enter key to submit form
+        document.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                validateLogin();
+            }
+        });
+
+        // Forgot password handler
+        document.querySelector('.forgot-password').addEventListener('click', (e) => {
+            e.preventDefault();
+            showAlert('Password reset link has been sent to your email.', 'info');
+        });
+    </script>
+</body>
+</html>
